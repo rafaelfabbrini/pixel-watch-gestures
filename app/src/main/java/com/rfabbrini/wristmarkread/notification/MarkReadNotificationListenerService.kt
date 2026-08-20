@@ -31,8 +31,15 @@ class MarkReadNotificationListenerService : NotificationListenerService() {
 
         val target = MarkAsReadDetector.detect(sbn)
         if (target == null) {
-            Log.d(LOG_TAG, "No mark-as-read action on ${sbn.packageName}; keeping the previous target")
-            // An unrelated notification must not clear a perfectly good target.
+            if (sbn.key == MarkReadRepository.currentKey()) {
+                // The tracked notification was updated and lost its action - its PendingIntent is
+                // no longer trustworthy, so look for another candidate.
+                Log.i(LOG_TAG, "Tracked notification ${sbn.key} no longer exposes a mark-as-read action")
+                rescanActiveNotifications("tracked notification lost its action")
+            } else {
+                // An unrelated notification must not clear a perfectly good target.
+                Log.d(LOG_TAG, "No mark-as-read action on ${sbn.packageName}; keeping the previous target")
+            }
             return
         }
 

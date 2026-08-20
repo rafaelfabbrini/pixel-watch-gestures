@@ -87,8 +87,8 @@ The APK lands at:
 app/build/outputs/apk/debug/app-debug.apk
 ```
 
-Or open the project folder in Android Studio (Narwhal or newer — anything that ships AGP 9
-support) and run the `app` configuration.
+Or open the project folder in Android Studio — any release that supports **AGP 9.3** — and run the
+`app` configuration.
 
 > The build needs `dl.google.com` (Google's Maven repository and the Android SDK). Behind a
 > restricted network, use the GitHub Actions workflow in §9 instead.
