@@ -254,20 +254,22 @@ private fun StatusLine(label: String, value: String, ok: Boolean) {
 @Composable
 private fun DebugSection(state: MarkReadUiState, gestureSupport: GestureSupport) {
     val target = state.target
-    SectionTitle("Debug")
-    val lines = buildList {
-        add("package: ${target?.packageName ?: "-"}")
-        add("key: ${target?.notificationKey ?: "-"}")
-        add("semanticAction: ${target?.semanticAction?.toString() ?: "-"}")
-        add(
-            "matchedBy: " + when (target?.matchSource) {
-                MatchSource.SEMANTIC_ACTION -> "SEMANTIC_ACTION_MARK_AS_READ"
-                MatchSource.ACTION_LABEL -> "action label '${target.actionLabel}'"
-                null -> "-"
-            },
-        )
-        add("gestureSupport: $gestureSupport")
+    val matchedBy = if (target == null) {
+        "-"
+    } else {
+        when (target.matchSource) {
+            MatchSource.SEMANTIC_ACTION -> "SEMANTIC_ACTION_MARK_AS_READ"
+            MatchSource.ACTION_LABEL -> "action label '" + target.actionLabel + "'"
+        }
     }
+    SectionTitle("Debug")
+    val lines = listOf(
+        "package: ${target?.packageName ?: "-"}",
+        "key: ${target?.notificationKey ?: "-"}",
+        "semanticAction: ${target?.semanticAction?.toString() ?: "-"}",
+        "matchedBy: $matchedBy",
+        "gestureSupport: $gestureSupport",
+    )
     lines.forEach { line ->
         Text(
             text = line,
