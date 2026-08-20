@@ -1,0 +1,28 @@
+[versions]
+# Compose 1.12.0 (the version Wear Compose 1.7.x builds on) requires compileSdk 37 and AGP 9.
+# See https://developer.android.com/develop/ui/compose/setup-compose-dependencies-and-compiler
+agp = "9.3.1"
+kotlin = "2.3.21"
+
+compileSdk = "37"
+minSdk = "30"
+targetSdk = "36"
+
+activityCompose = "1.13.0"
+composeUi = "1.12.0"
+coroutines = "1.11.0"
+# One-handed gestures (Modifier.oneHandedGesture / OneHandedGestureAction) were added in
+# androidx.wear.compose 1.7.0-beta01. There is no stable release carrying them yet.
+wearCompose = "1.7.0-beta01"
+
+[libraries]
+activity-compose = { module = "androidx.activity:activity-compose", version.ref = "activityCompose" }
+compose-ui-tooling = { module = "androidx.compose.ui:ui-tooling", version.ref = "composeUi" }
+compose-ui-tooling-preview = { module = "androidx.compose.ui:ui-tooling-preview", version.ref = "composeUi" }
+kotlinx-coroutines-android = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-android", version.ref = "coroutines" }
+wear-compose-foundation = { module = "androidx.wear.compose:compose-foundation", version.ref = "wearCompose" }
+wear-compose-material3 = { module = "androidx.wear.compose:compose-material3", version.ref = "wearCompose" }
+
+[plugins]
+android-application = { id = "com.android.application", version.ref = "agp" }
+compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--
+      Wear OS apps drawing with Compose use the platform DeviceDefault theme; the Compose
+      MaterialTheme supplies the actual colors and typography.
+    -->
+    <style name="Theme.WristMarkRead" parent="@android:style/Theme.DeviceDefault">
+        <item name="android:windowBackground">@android:color/black</item>
+    </style>
+</resources>

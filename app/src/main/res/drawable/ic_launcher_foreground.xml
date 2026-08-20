@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- An envelope with a check mark: "notification marked as read". -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M30,38h48a4,4 0,0 1,4 4v8l-28,15 -28,-15v-8a4,4 0,0 1,4 -4z" />
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M26,57l28,15 28,-15v13a4,4 0,0 1,-4 4h-48a4,4 0,0 1,-4 -4z" />
+    <path
+        android:fillColor="#8AD5A0"
+        android:pathData="M46,60l-8,-8 -5,5 13,13 22,-22 -5,-5z" />
+</vector>
