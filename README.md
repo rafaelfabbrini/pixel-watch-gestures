@@ -120,7 +120,7 @@ adb connect 192.168.1.42:5555
 # 2. Confirm the watch is listed
 adb devices -l
 
-# 3. Install (-r replaces an older build)
+# 3. Install (-r updates in place, keeping the notification-access grant)
 adb -s 192.168.1.42:5555 install -r app/build/outputs/apk/debug/app-debug.apk
 
 # 4. Launch it
@@ -131,6 +131,15 @@ Watch the logs while testing:
 
 ```bash
 adb -s 192.168.1.42:5555 logcat -s WristMarkRead
+```
+
+Debug builds are signed with `app/debug.keystore`, checked into the repository, so every build —
+local or from any CI run — carries the same signature and `install -r` updates in place. Should you
+ever hit `INSTALL_FAILED_UPDATE_INCOMPATIBLE`, the installed copy predates that keystore; uninstall
+once and reinstall, then re-grant notification access (§6):
+
+```bash
+adb -s <watch> uninstall com.rfabbrini.wristmarkread
 ```
 
 ## 6. Enable Notification Access
