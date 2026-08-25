@@ -11,6 +11,20 @@ enum class MatchSource {
     ACTION_LABEL,
 }
 
+/** Where on the notification the matched action was found. */
+enum class ActionOrigin {
+    /** The standard [android.app.Notification.actions] list. */
+    NOTIFICATION_ACTIONS,
+
+    /**
+     * The `android.wearable.EXTENSIONS` bundle written by
+     * `NotificationCompat.WearableExtender`. Watch-only actions live here and are invisible to
+     * code that reads [android.app.Notification.actions] alone - which is how most bridged
+     * phone notifications expose their "Mark as read" button.
+     */
+    WEARABLE_EXTENDER,
+}
+
 /**
  * An immutable snapshot of the newest notification that exposes a Mark-as-Read action.
  *
@@ -28,6 +42,8 @@ data class MarkReadTarget(
     /** Raw value of [android.app.Notification.Action.getSemanticAction] for the matched action. */
     val semanticAction: Int,
     val matchSource: MatchSource,
+    /** Which of the notification's two action lists the match came from. */
+    val actionOrigin: ActionOrigin,
     val postedAtMillis: Long,
     val actionIntent: PendingIntent,
 )

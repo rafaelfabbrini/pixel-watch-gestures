@@ -28,14 +28,26 @@ send the notification action's original PendingIntent
 the source app marks its item as read
 ```
 
-Detection is generic — there is no Gmail-specific (or any app-specific) code:
+Detection is generic — there is no Gmail-specific (or any app-specific) code.
+
+**Two action lists are searched.** Many apps — WhatsApp among them — attach their watch buttons
+with `NotificationCompat.WearableExtender`, which stores them in the notification's
+`android.wearable.EXTENSIONS` extras bundle rather than in `Notification.actions`. A bridged phone
+notification often exposes "Mark as read" *only* there, so both are read:
+
+1. `Notification.actions` — the standard list.
+2. The wearable extender bundle — watch-only actions.
+
+**Two recognition rules, applied across both lists:**
 
 1. **`Notification.Action.SEMANTIC_ACTION_MARK_AS_READ`** — the authoritative signal, and it always
-   wins.
-2. **Normalised label match**, used *only* when no action carries the semantic metadata:
+   wins, wherever the action was found.
+2. **Normalised label match**, used *only* when no action anywhere carries the semantic metadata:
    `mark as read`, `mark read`, `marcar como lida`, `marcar como lido`, `marcar como leida`,
    `marcar como leido`. Comparison is lower-cased and accent-stripped, so `Marcar como LÍDA`
    matches too.
+
+The debug block's `foundIn:` line reports which list the live match came from.
 
 Everything stays on the watch: no internet permission, no analytics, no storage of notification
 content. The current action lives in memory only, and is rebuilt from the active notifications

@@ -46,7 +46,8 @@ class MarkReadNotificationListenerService : NotificationListenerService() {
         Log.i(
             LOG_TAG,
             "Mark-as-read action detected: pkg=${target.packageName} match=${target.matchSource} " +
-                "semanticAction=${target.semanticAction} label='${target.actionLabel}'",
+                "foundIn=${target.actionOrigin} semanticAction=${target.semanticAction} " +
+                "label='${target.actionLabel}'",
         )
         MarkReadRepository.setTarget(target)
     }

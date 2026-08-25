@@ -268,6 +268,7 @@ private fun DebugSection(state: MarkReadUiState, gestureSupport: GestureSupport)
         "key: ${target?.notificationKey ?: "-"}",
         "semanticAction: ${target?.semanticAction?.toString() ?: "-"}",
         "matchedBy: $matchedBy",
+        "foundIn: ${target?.actionOrigin?.name ?: "-"}",
         "gestureSupport: $gestureSupport",
     )
     lines.forEach { line ->
